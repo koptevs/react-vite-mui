@@ -1,11 +1,10 @@
 import { CssBaseline, ThemeProvider } from "@mui/material"
 import { Box } from "@mui/system"
-import { IconButton } from "@mui/material"
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined"
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined"
+
 import Typography from "@mui/material/Typography"
 
 import { ColorModeContext, useMode, colorTokens } from "./theme"
+import { Topbar, Sidebar } from "./layouts"
 
 export default function App() {
     const [theme, colorMode] = useMode()
@@ -17,13 +16,8 @@ export default function App() {
                     <CssBaseline />
                     <div className="app">
                         <main className="content">
-                            <IconButton onClick={colorMode.toggleColorMode}>
-                                {theme.palette.mode === "dark" ? (
-                                    <DarkModeOutlinedIcon />
-                                ) : (
-                                    <LightModeOutlinedIcon />
-                                )}
-                            </IconButton>
+                            <Topbar />
+                            <Sidebar />
                             <Typography variant="h1">
                                 Heading 1 - color comes from the theme settings
                                 for headings
