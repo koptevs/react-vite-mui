@@ -13,13 +13,13 @@ import { ColorModeContext, colorTokens } from "../../theme"
 const Topbar = () => {
     const theme = useTheme()
     const colors = colorTokens(theme.palette.mode)
-    const colorModeCtx = React.useContext(ColorModeContext)
+    const colorMode = React.useContext(ColorModeContext)
 
     console.log(colors)
     return (
         <>
             <div>Topbar</div>
-            <IconButton onClick={colorModeCtx.toggleColorMode}>
+            <IconButton onClick={colorMode.toggleColorMode}>
                 {theme.palette.mode === "dark" ? (
                     <DarkModeOutlinedIcon />
                 ) : (
