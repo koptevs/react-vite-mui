@@ -142,6 +142,9 @@ export const themeSettings = (mode) => {
                       background: {
                           default: colors.primary[500],
                       },
+                      topbarBg: {
+                          main: colors.blueAccent[800],
+                      },
                   }
                 : {
                       // palette values for light mode
@@ -158,6 +161,9 @@ export const themeSettings = (mode) => {
                       },
                       background: {
                           default: "#fcfcfc",
+                      },
+                      topbarBg: {
+                          main: colors.blueAccent[800],
                       },
                   }),
         },
