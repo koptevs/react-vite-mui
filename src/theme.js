@@ -143,7 +143,7 @@ export const themeSettings = (mode) => {
                           default: colors.primary[500],
                       },
                       topbarBg: {
-                          main: colors.blueAccent[800],
+                          main: colors.redAccent[800],
                       },
                   }
                 : {
@@ -163,7 +163,7 @@ export const themeSettings = (mode) => {
                           default: "#fcfcfc",
                       },
                       topbarBg: {
-                          main: colors.blueAccent[800],
+                          main: colors.redAccent[600],
                       },
                   }),
         },
@@ -172,7 +172,7 @@ export const themeSettings = (mode) => {
 
         typography: {
             fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-            fontSize: 12,
+            // fontSize: 16,
             h1: {
                 fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
                 fontSize: 40,
