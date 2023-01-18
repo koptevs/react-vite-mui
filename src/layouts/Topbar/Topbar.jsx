@@ -1,7 +1,11 @@
 import * as React from "react"
-import PropTypes from "prop-types"
+
+import { Link as RouterLink } from "react-router-dom"
+import Link from "@mui/material/Link"
+
 import AppBar from "@mui/material/AppBar"
 import { useTheme } from "@mui/material"
+import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Divider from "@mui/material/Divider"
 import Drawer from "@mui/material/Drawer"
@@ -18,9 +22,14 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 
 import { ColorModeContext, colorTokens } from "../../theme"
+import ThemeLink from "../../components/ThemeLink"
 
 const drawerWidth = 240
-const navItems = ["Home", "About", "Contacts"]
+const navItems = [
+    { id: 1, name: "HOME", href: "/" },
+    { id: 2, name: "ABOUT", href: "/about" },
+    { id: 3, name: "CONTACTS", href: "/contacts" },
+]
 
 function Topbar(props) {
     const { window } = props
@@ -50,7 +59,7 @@ function Topbar(props) {
             <Divider />
             <List>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
+                    <ListItem key={item.id} disablePadding>
                         <ListItemButton
                             sx={{
                                 textAlign: "center",
@@ -61,7 +70,9 @@ function Topbar(props) {
                                 },
                             }}
                         >
-                            <ListItemText primary={item} sx={{}} />
+                            <ThemeLink to={item.href}>
+                                <ListItemText primary={item.name} sx={{}} />
+                            </ThemeLink>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -85,53 +96,48 @@ function Topbar(props) {
     return (
         <Box sx={{ display: "flex" }}>
             <AppBar component="nav" sx={{ bgcolor: topbarBackgroundColor }}>
-                <Toolbar sx={{ color: topbarTextColor }}>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: "none" } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                            flexGrow: 1,
-                            display: { xs: "none", sm: "block" },
-                        }}
-                    >
-                        MUI
-                    </Typography>
-                    <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                        {navItems.map((item) => (
-                            <Button
-                                key={item}
+                <Container maxWidth={theme.settings.containerWidth}>
+                    <Toolbar sx={{ color: topbarTextColor }}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            sx={{ mr: 2, display: { sm: "none" } }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Link component={RouterLink} to="/" sx={{ mr: "auto" }}>
+                            <Typography
+                                variant="h6"
+                                component="div"
                                 sx={{
-                                    color: "inherit",
-                                    "&:hover": {
-                                        color: "#ffffff",
-                                        backgroundColor: "transparent",
-                                    },
+                                    flexGrow: 1,
+                                    display: { xs: "none", sm: "block" },
                                 }}
                             >
-                                {item}
-                            </Button>
-                        ))}
-                        <IconButton
-                            onClick={colorMode.toggleColorMode}
-                            sx={{ ml: 2, color: "inherit" }}
-                        >
-                            {theme.palette.mode === "dark" ? (
-                                <DarkModeOutlinedIcon />
-                            ) : (
-                                <LightModeOutlinedIcon />
-                            )}
-                        </IconButton>
-                    </Box>
-                </Toolbar>
+                                MUI
+                            </Typography>
+                        </Link>
+                        <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                            {navItems.map((item) => (
+                                <ThemeLink to={item.href} key={item.id}>
+                                    {item.name}
+                                </ThemeLink>
+                            ))}
+                            <IconButton
+                                onClick={colorMode.toggleColorMode}
+                                sx={{ ml: 2, color: "inherit" }}
+                            >
+                                {theme.palette.mode === "dark" ? (
+                                    <LightModeOutlinedIcon />
+                                ) : (
+                                    <DarkModeOutlinedIcon />
+                                )}
+                            </IconButton>
+                        </Box>
+                    </Toolbar>
+                </Container>
             </AppBar>
             <Box component="nav">
                 <Drawer

@@ -1,6 +1,7 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+
 import { CssBaseline, ThemeProvider } from "@mui/material"
 import { Box } from "@mui/system"
-
 import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 
@@ -16,38 +17,46 @@ export default function App() {
 
     return (
         <>
-            <ColorModeContext.Provider value={colorMode}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <div className="app">
-                        <main className="content">
-                            <Topbar />
-                            <Sidebar />
-                            <About />
-                            <Contacts />
-                            <Typography variant="h1">
-                                Heading 1 - color comes from the theme settings
-                                for headings
-                            </Typography>
-                            <Box
-                                sx={{
-                                    fontSize: "18px",
-                                    fontWeight: "bold",
-                                    color: colors.greenAccent[300],
-                                }}
-                            >
-                                Box - inline styles with sx property - color
-                                imported from colorTokens palette inside
-                                theme.js file
-                            </Box>
+            <Router>
+                <ColorModeContext.Provider value={colorMode}>
+                    <ThemeProvider theme={theme}>
+                        <CssBaseline />
+                        <div className="app">
+                            <main className="content">
+                                <Topbar />
+                                <Routes>
+                                    <Route path="/about" element={<About />} />
+                                    <Route
+                                        path="/contacts"
+                                        element={<Contacts />}
+                                    />
+                                </Routes>
+                                <Sidebar />
 
-                            <Button variant="contained" color="topbarBg">
-                                Contained
-                            </Button>
-                        </main>
-                    </div>
-                </ThemeProvider>
-            </ColorModeContext.Provider>
+                                <Typography variant="h1">
+                                    Heading 1 - color comes from the theme
+                                    settings for headings
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        fontSize: "18px",
+                                        fontWeight: "bold",
+                                        color: colors.greenAccent[300],
+                                    }}
+                                >
+                                    Box - inline styles with sx property - color
+                                    imported from colorTokens palette inside
+                                    theme.js file
+                                </Box>
+
+                                <Button variant="contained" color="topbarBg">
+                                    Contained
+                                </Button>
+                            </main>
+                        </div>
+                    </ThemeProvider>
+                </ColorModeContext.Provider>
+            </Router>
         </>
     )
 }

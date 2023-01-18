@@ -200,6 +200,9 @@ export const themeSettings = (mode) => {
                 fontSize: 14,
             },
         },
+        settings: {
+            containerWidth: "xl",
+        },
     }
 }
 
